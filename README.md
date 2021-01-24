@@ -5,7 +5,7 @@
 2. Install nodejs
 3. Rum command 'npm i' in your directory
 4. Visit the web at 'localhost:3000'
-
+Note: press 'q' to quit opencv
 # Demo:
 <p align="center">
   <h2> Home </h2>
