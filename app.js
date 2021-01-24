@@ -45,7 +45,6 @@ app.post('/take_attendant', (req, res) => {
         else{
             result.forEach(studentID => {
                 let index = allStudent.findIndex(element => element.studentID == studentID)
-                console.log(index)
                 if(index != null && allStudent[index] != null){
                     allStudent[index].status = true
                 }
