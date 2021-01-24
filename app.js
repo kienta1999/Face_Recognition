@@ -13,14 +13,14 @@ let allStudent = [] // { studentID: '123', lastName: 'Kien', firstName: 'Ta', st
 let pythonArgs = [] //
 
 app.get('/', function (req, res) {
-   res.render('trang_chu');
+   res.render('home');
 })
 
-app.get('/them_hs', (req, res) => {
-    res.render('them_hs');
+app.get('/add_student', (req, res) => {
+    res.render('add_student');
 })
 
-app.post('/them_hs', (req, res) => {
+app.post('/add_student', (req, res) => {
     req.body.status = false;
     allStudent.push(req.body);
     pythonArgs.push(req.body.studentID);
@@ -28,25 +28,30 @@ app.post('/them_hs', (req, res) => {
     PythonShell.run('Face_recog.py', {args: [req.body.studentID]}, (err, result) =>{
         PythonShell.run('Face_part2.py', null, (err, result) =>{
             console.log(result)
-            res.redirect('/diem_danh');
+            res.redirect('/take_attendant');
         });
     });
 })
 
-app.get('/diem_danh', (req, res) => {
-    res.render('diem_danh', {allStudent: allStudent});
+app.get('/take_attendant', (req, res) => {
+    res.render('take_attendant', {allStudent: allStudent});
 })
 
-app.post('/diem_danh', (req, res) => {
+app.post('/take_attendant', (req, res) => {
     PythonShell.run('Face_part3.py', {args: pythonArgs}, (err, result) =>{
         if(result == null || result[0] == null){
-            res.redirect('/diem_danh');    
+            res.redirect('/take_attendant');    
         }
-        result.forEach(studentID => {
-            let index = allStudent.findIndex(element => element.studentID == studentID)
-            allStudent[index].status = true
-        })
-        res.redirect('/diem_danh');
+        else{
+            result.forEach(studentID => {
+                let index = allStudent.findIndex(element => element.studentID == studentID)
+                console.log(index)
+                if(index != null && allStudent[index] != null){
+                    allStudent[index].status = true
+                }
+            })
+            res.redirect('/take_attendant');
+        }
     });
 })
 
@@ -54,7 +59,7 @@ app.post('/reset', (req, res) => {
     for(let i = 0; i < allStudent.length; i++){
         allStudent[i].status = false
     }
-    res.redirect('/diem_danh');
+    res.redirect('/take_attendant');
 })
 
 app.listen(3000, () => {

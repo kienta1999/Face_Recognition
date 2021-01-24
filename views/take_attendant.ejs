@@ -3,10 +3,10 @@
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">Mã học sinh</th>
-            <th scope="col">Họ</th>
-            <th scope="col">Tên</th>
-            <th scope="col">Đã điểm danh?</th>
+            <th scope="col">Student ID</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">First name</th>
+            <th scope="col">Attendent?</th>
           </tr>
         </thead>
         <tbody>
@@ -15,14 +15,14 @@
                     <th scope="row"> <%= element.studentID %> </th>
                     <td> <%= element.lastName %> </td>
                     <td><%= element.firstName %> </td>
-                    <td> <%= element.status ? "Có mặt" : "Vắng" %> </td>
+                    <td> <%= element.status ? "Present" : "Absent" %> </td>
                 </tr>
             <% }) %>
         </tbody>
       </table>
 
       <h2>Điểm danh</h2>
-      <form action="/diem_danh" method="post">
+      <form action="/take_attendant" method="post">
         <button type="submit">Chụp ảnh</button>
       </form>
 

@@ -33,8 +33,8 @@ while True:
     cv2.imshow('im',im)
     if cv2.waitKey(10) & 0xFF==ord('q'):
         break
-# print(max(freq, key=freq.get))
-for i in freq:
-    print(i)
+print(max(freq, key=freq.get))
+# for i in freq:
+#     print(i)
 cam.release()
 cv2.destroyAllWindows()
