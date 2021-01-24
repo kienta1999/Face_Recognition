@@ -9,17 +9,11 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs'); 
 app.use(express.static(path.join(__dirname, 'static')));
 
-let allStudent = [] // { studentID: '123', lastName: 'Kien', firstName: 'Ta'}
-let checkedStudent = [] // 123
+let allStudent = [] // { studentID: '123', lastName: 'Kien', firstName: 'Ta', status: true/false}
+let pythonArgs = []
 
 app.get('/', function (req, res) {
    res.render('trang_chu');
-   
-   PythonShell.run('test.py', {args: [20]}, function (err, res) {
-    if (err) throw err;
-    console.log(res);
-  });
-
 })
 
 app.get('/them_hs', (req, res) => {
@@ -27,12 +21,34 @@ app.get('/them_hs', (req, res) => {
 })
 
 app.post('/them_hs', (req, res) => {
+    req.body.status = false;
     allStudent.push(req.body);
-    res.redirect('/them_hs');
+    pythonArgs.push(req.body.studentID);
+    pythonArgs.push(req.body.firstName);
+    PythonShell.run('Face_recog.py', {args: [req.body.studentID]}, (err, result) =>{
+        console.log(result)
+        PythonShell.run('Face_part2.py', null, (err, result) =>{
+            console.log(result)
+            res.redirect('/diem_danh');
+        });
+    });
 })
 
 app.get('/diem_danh', (req, res) => {
-    res.render('diem_danh', {allStudent: allStudent, checkedStudent: checkedStudent});
+    // console.log(pythonArgs)
+    res.render('diem_danh', {allStudent: allStudent});
+})
+
+app.post('/diem_danh', (req, res) => {
+    PythonShell.run('Face_part3.py', {args: pythonArgs}, (err, result) =>{
+        if(result == null || result[0] == null){
+            res.redirect('/diem_danh');    
+        }
+        console.log(result)
+        let index = allStudent.findIndex(element => element.studentID == result[0])
+        allStudent[index].status = true
+        res.redirect('/diem_danh');
+    });
 })
 
 app.listen(3000, () => {

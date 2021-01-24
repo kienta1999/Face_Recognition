@@ -1,5 +1,5 @@
 <%- include("partials/header") -%>
-    <h2>Các học sinh đã điểm danh</h2>
+    <h2>Tất cả các học sinh</h2>
     <table class="table">
         <thead>
           <tr>
@@ -15,10 +15,15 @@
                     <th scope="row"> <%= element.studentID %> </th>
                     <td> <%= element.lastName %> </td>
                     <td><%= element.firstName %> </td>
-                    <td> X </td>
+                    <td> <%= element.status ? "Có mặt" : "Vắng" %> </td>
                 </tr>
             <% }) %>
         </tbody>
       </table>
+
+      <h2>Điểm danh</h2>
+      <form action="/diem_danh" method="post">
+        <button type="submit">Chụp ảnh</button>
+      </form>
 
 <%- include("partials/footer") -%>
