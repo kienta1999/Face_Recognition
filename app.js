@@ -13,7 +13,7 @@ let allStudent = [] // { studentID: '123', lastName: 'Kien', firstName: 'Ta'}
 let checkedStudent = [] // 123
 
 app.get('/', function (req, res) {
-   res.render('trang_chu', {name: 'Kien'});
+   res.render('trang_chu');
    
    PythonShell.run('test.py', {args: [20]}, function (err, res) {
     if (err) throw err;
