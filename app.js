@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'static')));
 
 let allStudent = [] // { studentID: '123', lastName: 'Kien', firstName: 'Ta', status: true/false}
-let pythonArgs = []
+let pythonArgs = [] //
 
 app.get('/', function (req, res) {
    res.render('trang_chu');
@@ -26,7 +26,6 @@ app.post('/them_hs', (req, res) => {
     pythonArgs.push(req.body.studentID);
     pythonArgs.push(req.body.firstName);
     PythonShell.run('Face_recog.py', {args: [req.body.studentID]}, (err, result) =>{
-        console.log(result)
         PythonShell.run('Face_part2.py', null, (err, result) =>{
             console.log(result)
             res.redirect('/diem_danh');
@@ -35,7 +34,6 @@ app.post('/them_hs', (req, res) => {
 })
 
 app.get('/diem_danh', (req, res) => {
-    // console.log(pythonArgs)
     res.render('diem_danh', {allStudent: allStudent});
 })
 
