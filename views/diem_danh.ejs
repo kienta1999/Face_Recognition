@@ -1,0 +1,24 @@
+<%- include("partials/header") -%>
+    <h2>Các học sinh đã điểm danh</h2>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Mã học sinh</th>
+            <th scope="col">Họ</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Đã điểm danh?</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% allStudent.forEach(element => { %>
+                <tr>
+                    <th scope="row"> <%= element.studentID %> </th>
+                    <td> <%= element.lastName %> </td>
+                    <td><%= element.firstName %> </td>
+                    <td> X </td>
+                </tr>
+            <% }) %>
+        </tbody>
+      </table>
+
+<%- include("partials/footer") -%>
