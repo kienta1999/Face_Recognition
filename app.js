@@ -52,6 +52,13 @@ app.post('/diem_danh', (req, res) => {
     });
 })
 
+app.post('/reset', (req, res) => {
+    for(let i = 0; i < allStudent.length(); i++){
+        allStudent[i].status = false
+    }
+    res.redirect('/diem_danh');
+})
+
 app.listen(3000, () => {
     console.log('Application running at port 3000');
 })
