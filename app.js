@@ -44,9 +44,10 @@ app.post('/diem_danh', (req, res) => {
         if(result == null || result[0] == null){
             res.redirect('/diem_danh');    
         }
-        console.log(result)
-        let index = allStudent.findIndex(element => element.studentID == result[0])
-        allStudent[index].status = true
+        result.forEach(studentID => {
+            let index = allStudent.findIndex(element => element.studentID == studentID)
+            allStudent[index].status = true
+        })
         res.redirect('/diem_danh');
     });
 })
