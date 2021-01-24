@@ -18,5 +18,3 @@
   <img src="images\take_attendant_opencv.png" width="700" title="takeAttendantPython">
   <img src="images\take_attendant_web_after.png" width="700" title="takeAttendantAfter">
 </p>
-
-Home page
