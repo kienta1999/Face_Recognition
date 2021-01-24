@@ -1,0 +1,1 @@
+An application to do face recognition using Python as the backend logic and Nodejs for the Web UI. 
