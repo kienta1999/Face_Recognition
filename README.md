@@ -9,7 +9,7 @@
 # Demo:
 <p align="center">
   <h2> Home </h2>
-  <img src="images\home.png" width="350" title="home">
+  <img src="images\home.png" width="700" title="home">
   <h2> Add student to system </h2>
   <img src="images\add_student_web.png" width="350" title="addStudentWeb">
   <img src="images\add_student_opencv.png" width="350" title="addStudentPython">
